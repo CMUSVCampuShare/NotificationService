@@ -1,0 +1,8 @@
+spring:
+  kafka:
+    topic:
+      name: notify-driver
+    group:
+      id: notify-driver-group
+    containerFactory:
+      name: kafkaListenerContainerFactory

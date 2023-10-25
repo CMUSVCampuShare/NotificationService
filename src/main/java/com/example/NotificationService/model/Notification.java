@@ -6,6 +6,6 @@ import lombok.Data;
 public class Notification {
     private Integer userID;
 
-    private String message;
+    private Object message;
 
 }
