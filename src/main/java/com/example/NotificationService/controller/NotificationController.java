@@ -4,10 +4,9 @@ import com.example.NotificationService.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Controller
 public class NotificationController {
@@ -27,5 +26,19 @@ public class NotificationController {
         notification.setPassengerID("test passenger");
         notificationService.notifyUser(userID, notification);
         return ResponseEntity.ok("Driver has received your request!");
+    }
+
+    @GetMapping("/notifications")
+    @ResponseBody
+    public ResponseEntity getNotifications(@RequestParam String userID) {
+        ArrayList<Notification> notifications = notificationService.getNotificationsForUser(userID);
+        return ResponseEntity.ok(notifications);
+    }
+
+    @DeleteMapping("/notifications/{notifiactionId}")
+    @ResponseBody
+    public ResponseEntity deleteNotificationRecord(@PathVariable String notifiactionId) {
+        notificationService.deleteNotification(notifiactionId);
+        return ResponseEntity.ok("Notification record successfully deleted.");
     }
 }

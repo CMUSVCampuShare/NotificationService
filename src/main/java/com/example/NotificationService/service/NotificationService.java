@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class NotificationService {
 
@@ -13,5 +15,12 @@ public class NotificationService {
 
     public void notifyUser(String userID, Notification notification){
         messagingTemplate.convertAndSendToUser(userID, "/notification", notification);
+    }
+
+    public ArrayList<Notification> getNotificationsForUser(String userID){
+        return new ArrayList<Notification>();
+    }
+
+    public void deleteNotification(String notificationId){
     }
 }
