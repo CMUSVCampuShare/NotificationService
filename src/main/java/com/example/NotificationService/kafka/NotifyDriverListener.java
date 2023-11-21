@@ -17,7 +17,7 @@ public class NotifyDriverListener {
     @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.group.id}", containerFactory = "${spring.kafka.containerFactory.name}")
     public void listenNotificationRequest(String testDTO) {
         logger.info("Received a NotifyDriverDTO message from Kafka: {}", testDTO);
-        notificationService.notifyUser(5, null);
+        notificationService.notifyUser("15", null);
     }
 
 }
