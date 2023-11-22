@@ -1,12 +1,13 @@
 package com.example.NotificationService.controller;
 import com.example.NotificationService.model.Notification;
+import com.example.NotificationService.model.NotificationRecord;
 import com.example.NotificationService.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class NotificationController {
@@ -24,14 +25,14 @@ public class NotificationController {
         subnotification.setPassengerID("test");
         notification.setMessage(subnotification);
         notification.setPassengerID("test passenger");
-        notificationService.notifyUser(userID, notification);
-        return ResponseEntity.ok("Driver has received your request!");
+        NotificationRecord notificationRecord = notificationService.notifyUser(userID, notification);
+        return ResponseEntity.ok(notificationRecord);
     }
 
     @GetMapping("/notifications")
     @ResponseBody
     public ResponseEntity getNotifications(@RequestParam String userID) {
-        ArrayList<Notification> notifications = notificationService.getNotificationsForUser(userID);
+        List<NotificationRecord> notifications = notificationService.getNotificationsForUser(userID);
         return ResponseEntity.ok(notifications);
     }
 
