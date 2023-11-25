@@ -7,7 +7,7 @@ spring:
     consumer:
       bootstrap-servers: 35.219.146.212:9092
     topic:
-      name: notify-driver
+      name: notify_driver_topic
     group:
       id: notify-driver-group
     containerFactory:
