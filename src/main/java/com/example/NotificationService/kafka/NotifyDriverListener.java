@@ -33,7 +33,6 @@ public class NotifyDriverListener {
             kafkaRecord.setRecipientUserID(jsonNode.get("recipientUserID").asText());
             kafkaRecord.setJoinNotification(jsonNode.get("joinNotification"));
 
-            Notification notification = new Notification();
             notificationService.notifyUser(kafkaRecord.getRecipientUserID(), kafkaRecord.getJoinNotification());
         } catch (Exception e) {
             e.printStackTrace();
