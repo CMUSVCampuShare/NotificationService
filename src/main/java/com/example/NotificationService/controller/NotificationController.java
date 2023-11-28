@@ -36,10 +36,11 @@ public class NotificationController {
         return ResponseEntity.ok(notifications);
     }
 
-    @DeleteMapping("/notifications/{notifiactionId}")
+    @DeleteMapping("/notifications/{notificationId}")
     @ResponseBody
-    public ResponseEntity deleteNotificationRecord(@PathVariable String notifiactionId) {
-        notificationService.deleteNotification(notifiactionId);
+    public ResponseEntity deleteNotificationRecord(@PathVariable String notificationId) {
+        System.out.println("Delete Called");
+        notificationService.deleteNotification(notificationId);
         return ResponseEntity.ok("Notification record successfully deleted.");
     }
 }
