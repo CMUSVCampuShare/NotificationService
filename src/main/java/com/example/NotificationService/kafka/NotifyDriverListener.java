@@ -28,10 +28,8 @@ public class NotifyDriverListener {
         try {
             JsonNode jsonNode = objectMapper.readTree(testDTO);
             KafkaRecord kafkaRecord = new KafkaRecord();
-            kafkaRecord.setMessage(jsonNode.get("message").asText());
-            kafkaRecord.setStatus(jsonNode.get("status").asText());
-            kafkaRecord.setRecipientUserID(jsonNode.get("recipientUserID").asText());
-            kafkaRecord.setJoinNotification(jsonNode.get("joinNotification"));
+            kafkaRecord.setRecipientUserID(jsonNode.get("passengerId").asText());
+            kafkaRecord.setJoinNotification(jsonNode.get("message").asText());
 
             notificationService.notifyUser(kafkaRecord.getRecipientUserID(), kafkaRecord.getJoinNotification());
         } catch (Exception e) {
