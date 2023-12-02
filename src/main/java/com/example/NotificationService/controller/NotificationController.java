@@ -19,12 +19,7 @@ public class NotificationController {
     @ResponseBody
     public ResponseEntity requestToNotify(@RequestParam String userID){
         System.out.println("Ride join");
-        Notification notification = new Notification();
-        Notification subnotification = new Notification();
-        subnotification.setMessage("test");
-        subnotification.setPassengerID("test");
-        notification.setMessage(subnotification);
-        notification.setPassengerID("test passenger");
+        String notification = "Sorry AB your ride got rejected.";
         NotificationRecord notificationRecord = notificationService.notifyUser(userID, notification);
         return ResponseEntity.ok(notificationRecord);
     }

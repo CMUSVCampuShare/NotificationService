@@ -26,7 +26,7 @@ public class NotificationService {
         NotificationRecord savedRecord = notificationRepository.save(notificationRecord);
         System.out.println("Saved record: " + savedRecord);
 
-        messagingTemplate.convertAndSendToUser(userID, "/notification", notification);
+        messagingTemplate.convertAndSendToUser(userID, "/notification", notificationRecord);
         return savedRecord;
     }
 

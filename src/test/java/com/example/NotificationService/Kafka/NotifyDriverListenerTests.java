@@ -31,7 +31,7 @@ public class NotifyDriverListenerTests {
 
         when(notificationService.notifyUser(any(), any())).thenReturn(newNotificationRecord);
 
-        String jsonString = "{\"message\":\"Notification has been created\",\"status\":\"CREATED\",\"recipientUserID\":\"userId\",\"joinNotification\":\"abcdefg\"}";
+        String jsonString = "{\"message\":\"Notification has been created\",\"status\":\"CREATED\",\"passengerId\":\"userId\",\"joinNotification\":\"abcdefg\"}";
 
         notifyDriverListener.listenNotificationRequest(jsonString);
 
