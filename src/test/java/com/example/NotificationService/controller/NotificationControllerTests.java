@@ -1,4 +1,5 @@
 package com.example.NotificationService.controller;
+import com.example.NotificationService.model.NotificationDetails;
 import com.example.NotificationService.model.NotificationRecord;
 import com.example.NotificationService.service.NotificationService;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ public class NotificationControllerTests {
         NotificationRecord newNotificationRecord = new NotificationRecord();
         newNotificationRecord.setNotificationId("notifId");
         newNotificationRecord.setRecipientId("recipientId");
-        newNotificationRecord.setNotification(new Object());
+        newNotificationRecord.setNotification(new NotificationDetails());
         List<NotificationRecord> mockNotifications = Collections.singletonList(newNotificationRecord);
 
         when(notificationService.getNotificationsForUser(userId)).thenReturn(mockNotifications);

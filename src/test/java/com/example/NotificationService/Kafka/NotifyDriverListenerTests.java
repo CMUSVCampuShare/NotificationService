@@ -1,5 +1,6 @@
 package com.example.NotificationService.Kafka;
 import com.example.NotificationService.kafka.NotifyDriverListener;
+import com.example.NotificationService.model.NotificationDetails;
 import com.example.NotificationService.model.NotificationRecord;
 import com.example.NotificationService.service.NotificationService;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,11 +28,13 @@ public class NotifyDriverListenerTests {
         NotificationRecord newNotificationRecord = new NotificationRecord();
         newNotificationRecord.setNotificationId("notifId");
         newNotificationRecord.setRecipientId("recipientId");
-        newNotificationRecord.setNotification(new Object());
+        NotificationDetails mockNotificationDetails = new NotificationDetails();
+        mockNotificationDetails.setNotificationBody("testNotification");
+        newNotificationRecord.setNotification(mockNotificationDetails);
 
         when(notificationService.notifyUser(any(), any())).thenReturn(newNotificationRecord);
 
-        String jsonString = "{\"message\":\"Notification has been created\",\"status\":\"CREATED\",\"passengerId\":\"userId\",\"joinNotification\":\"abcdefg\"}";
+        String jsonString = "{\"passengerId\":\"a3c1944d-e537-4a36-ad92-6e2f96b602b8\",\"message\":{\"passengerID\":null,\"postId\":null,\"postTitle\":null,\"notificationBody\":\"Sorry your request has been rejected\"}}";
 
         notifyDriverListener.listenNotificationRequest(jsonString);
 

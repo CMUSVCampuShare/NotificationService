@@ -10,5 +10,5 @@ public class NotificationRecord {
     @Id
     private String notificationId;
     private String recipientId;
-    private Object notification;
+    private NotificationDetails notification;
 }

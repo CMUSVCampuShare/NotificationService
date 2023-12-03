@@ -2,6 +2,7 @@ package com.example.NotificationService.kafka;
 
 import com.example.NotificationService.model.KafkaRecord;
 import com.example.NotificationService.model.Notification;
+import com.example.NotificationService.model.NotificationDetails;
 import com.example.NotificationService.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,14 @@ public class NotifyDriverListener {
             JsonNode jsonNode = objectMapper.readTree(testDTO);
             KafkaRecord kafkaRecord = new KafkaRecord();
             kafkaRecord.setRecipientUserID(jsonNode.get("passengerId").asText());
-            kafkaRecord.setJoinNotification(jsonNode.get("message").asText());
+
+            NotificationDetails notificationDetails= new NotificationDetails();
+            notificationDetails.setNotificationBody(jsonNode.get("message").get("notificationBody").toString());
+            notificationDetails.setPassengerID(jsonNode.get("message").get("passengerID").asText());
+            notificationDetails.setPostId(jsonNode.get("message").get("postId").asText());
+            notificationDetails.setPostTitle(jsonNode.get("message").get("postTitle").asText());
+
+            kafkaRecord.setJoinNotification(notificationDetails);
 
             notificationService.notifyUser(kafkaRecord.getRecipientUserID(), kafkaRecord.getJoinNotification());
         } catch (Exception e) {

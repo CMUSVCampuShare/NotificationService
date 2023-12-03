@@ -1,5 +1,6 @@
 package com.example.NotificationService.service;
 
+import com.example.NotificationService.model.NotificationDetails;
 import com.example.NotificationService.model.NotificationRecord;
 import com.example.NotificationService.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class NotificationService {
     @Autowired
     private NotificationRepository notificationRepository;
 
-    public NotificationRecord notifyUser(String userID, Object notification){
+    public NotificationRecord notifyUser(String userID, NotificationDetails notification){
         NotificationRecord notificationRecord = new NotificationRecord();
         notificationRecord.setRecipientId(userID);
         notificationRecord.setNotification(notification);

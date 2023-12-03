@@ -1,5 +1,6 @@
 package com.example.NotificationService.controller;
 import com.example.NotificationService.model.Notification;
+import com.example.NotificationService.model.NotificationDetails;
 import com.example.NotificationService.model.NotificationRecord;
 import com.example.NotificationService.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,10 @@ public class NotificationController {
     @ResponseBody
     public ResponseEntity requestToNotify(@RequestParam String userID){
         System.out.println("Ride join");
-        String notification = "Sorry AB your ride got rejected.";
-        NotificationRecord notificationRecord = notificationService.notifyUser(userID, notification);
+        String notification = "Can i join your rejected.";
+        NotificationDetails notificationDetails = new NotificationDetails();
+        notificationDetails.setNotificationBody(notification);
+        NotificationRecord notificationRecord = notificationService.notifyUser(userID, notificationDetails);
         return ResponseEntity.ok(notificationRecord);
     }
 

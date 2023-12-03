@@ -7,5 +7,5 @@ public class KafkaRecord {
     private String message;
     private String status;
     private String recipientUserID;
-    private Object joinNotification;
+    private NotificationDetails joinNotification;
 }

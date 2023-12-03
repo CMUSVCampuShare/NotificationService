@@ -1,5 +1,6 @@
 package com.example.NotificationService.service;
 
+import com.example.NotificationService.model.NotificationDetails;
 import com.example.NotificationService.model.NotificationRecord;
 import com.example.NotificationService.repository.NotificationRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,21 +34,23 @@ public class NotificationServiceTests {
     void notifyUserCreatesWebsocket() {
         String userId = "userId";
         Object notification = new Object();
+        NotificationDetails notificationDetails = new NotificationDetails();
+        notificationDetails.setNotificationBody(notification);
 
         String notificationId = "notificationId";
         NotificationRecord mockNotificationRecord = new NotificationRecord();
         mockNotificationRecord.setRecipientId(userId);
-        mockNotificationRecord.setNotification(notification);
+        mockNotificationRecord.setNotification(notificationDetails);
         mockNotificationRecord.setNotificationId(notificationId);
 
         when(notificationRepository.save(any())).thenReturn(mockNotificationRecord);
         doNothing().when(simpMessagingTemplate).convertAndSendToUser(userId, "/notification", notification);
 
-        NotificationRecord savedNotification = notificationService.notifyUser(userId, notification);
+        NotificationRecord savedNotification = notificationService.notifyUser(userId, notificationDetails);
         assertNotNull(savedNotification);
         assertEquals(notificationId, savedNotification.getNotificationId());
         assertEquals(userId, savedNotification.getRecipientId());
-        assertEquals(notification, savedNotification.getNotification());
+        assertEquals(notificationDetails, savedNotification.getNotification());
         verify(notificationRepository, times(1)).save(any());
 
     }
@@ -55,7 +58,7 @@ public class NotificationServiceTests {
     @Test
     void getNotificationsForUser_ReturnsAllRecords(){
         String userId = "userId";
-        Object notification = new Object();
+        NotificationDetails notification = new NotificationDetails();
 
         String notificationId = "notificationId";
         NotificationRecord mockNotificationRecord = new NotificationRecord();
@@ -75,7 +78,7 @@ public class NotificationServiceTests {
     @Test
     void deleteNotification_DeletesNotification() {
         String userId = "userId";
-        Object notification = new Object();
+        NotificationDetails notification = new NotificationDetails();
 
         String notificationId = "notificationId";
         NotificationRecord mockNotificationRecord = new NotificationRecord();
